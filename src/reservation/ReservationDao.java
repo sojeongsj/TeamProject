@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+import java.util.Random;
 
 public class ReservationDao {
 /*	
@@ -41,20 +41,21 @@ public class ReservationDao {
 		
 		Connection connection = OracleUtility.getConnection();
 		
-		String sql = "INSERT INTO reservation VALUES(?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO reservation VALUES(reserseq.nextval, sysdate, ?, cusseq.nextval, ?, ?);";
 		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setString(1, reser.getReserNo());
-		ps.setDate(2, reser.getReserDate());
-		ps.setString(3, reser.getReserSeat());
-		ps.setString(4, reser.getMovieNo());
-		ps.setInt(5, reser.getCustNo());
-		ps.setInt(6, reser.getScreenNo());
-		int result = ps.executeUpdate();
+		ps.setString(1, reser.getReserSeat());
+		ps.setString(2, reser.getMovieNo());//영화이름으로 바꾸기
+		Random random = new Random();
+        int screenNo = random.nextInt(15) + 1; // 1부터 15까지의 랜덤한 숫자 생성
+        ps.setInt(3, screenNo);
+		
+        int result = ps.executeUpdate();
 		
 		ps.close();
 		connection.close();		
 		return result;
 	}
+	
 	public ReservationDto ReservationOne(int search) throws SQLException {		//4.예매내역검색(예매번호) 
 		Connection conn = OracleUtility.getConnection();
 		String sql ="SELECT * FROM reservation WHERE ReserNo = ?";
