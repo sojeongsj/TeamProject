@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import koreait.jdbc.day5.OracleUtility;
+
 
 
 public class ScreeningDao {
 	
 	// 현재 상영작 보여주기
 	
-	public List<ScreeningDto> selectAll() throws SQLException {
+	public List<ScreeningDto> ScreeningselectAll() throws SQLException {
 		Connection connection = OracleUtility.getConnection();
 		   String sql = "select * from Screeening ";
 		   PreparedStatement ps = connection.prepareStatement(sql);
@@ -27,5 +27,51 @@ public class ScreeningDao {
 		   return results;
 	}
 	
+	
+	public int Screeningupdate(ScreeningDto screen) throws SQLException {
+		Connection connection =   OracleUtility.getConnection();
+		String sql = "update Screening set ScreenNo = ?, MovieNO = ?, MovieTitle = ?, ScreenDate = ?, ScreenTheater =?";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setInt(1, screen.getScreenNO());
+		ps.setString(2, screen.getMovieNO());
+		ps.setString(3, screen.getMovieTitle());
+		ps.setDate(4, screen.getScreenDate());
+		ps.setString(5, screen.getScreenTheater());
+		int result = ps.executeUpdate();
+		
+		ps.close();
+		connection.close();
+		return result;
+		
+	}
+	
+	public int Screeninginsert (ScreeningDto screen) throws SQLException {
+		Connection connection =   OracleUtility.getConnection();
+		String sql = "insert into Screening values(?,?,?,?,?)";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setInt(1, screen.getScreenNO());
+		ps.setString(2, screen.getMovieNO());
+		ps.setString(3, screen.getMovieTitle());
+		ps.setDate(4, screen.getScreenDate());
+		ps.setString(5, screen.getScreenTheater());
+		int result = ps.executeUpdate();
+		
+		ps.close();
+		connection.close();
+		return result;
+	}
+	
+	public int Screeningdelete(ScreeningDto screen) throws SQLException {
+		Connection connection =   OracleUtility.getConnection();
+		String sql = "delete movie where MovieNo = ?";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setInt(1, screen.getScreenNO());
+		int result = ps.executeUpdate();
+		
+		ps.close();
+		connection.close();
+		return result;
+		
+	}
 	
 }
