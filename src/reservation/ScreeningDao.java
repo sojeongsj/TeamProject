@@ -27,7 +27,7 @@ public class ScreeningDao {
 		   return results;
 	}
 	
-	
+	// 상영 정보 업데이트
 	public int Screeningupdate(ScreeningDto screen) throws SQLException {
 		Connection connection =   OracleUtility.getConnection();
 		String sql = "update Screening set ScreenNo = ?, MovieNO = ?, MovieTitle = ?, ScreenDate = ?, ScreenTheater =?";
@@ -45,6 +45,7 @@ public class ScreeningDao {
 		
 	}
 	
+	// 상영 정보 인서트
 	public int Screeninginsert (ScreeningDto screen) throws SQLException {
 		Connection connection =   OracleUtility.getConnection();
 		String sql = "insert into Screening values(?,?,?,?,?)";
@@ -61,6 +62,7 @@ public class ScreeningDao {
 		return result;
 	}
 	
+	// 상영 정보 딜리트
 	public int Screeningdelete(ScreeningDto screen) throws SQLException {
 		Connection connection =   OracleUtility.getConnection();
 		String sql = "delete movie where MovieNo = ?";
