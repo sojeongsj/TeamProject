@@ -1,6 +1,7 @@
 package movie.kiosk;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,14 +17,20 @@ import lombok.ToString;
 
 public class ScreeningDto {
 	
-	public ScreeningDto(String MovieTitle, Date ScreenDate) {
+	public ScreeningDto(String MovieTitle, Timestamp ScreenDate) {
 		this.MovieTitle = MovieTitle;
 		this.ScreenDate = ScreenDate;
 	}
+	
+	
+	public ScreeningDto(int ScreenNo) {
+		this.ScreenNO = ScreenNo;
+	}
+
+
 	int ScreenNO;			// 영화 상영 품번
-	String MovieNO;			// 영화 품번
-	String MovieTitle;		// 영화 제목
-	Date ScreenDate;		// 상영 시간
+	Timestamp ScreenDate;		// 상영 시간
 	String ScreenTheater;	// 상영관 
+	String MovieTitle;		// 영화 제목
 	
 }

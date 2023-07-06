@@ -16,13 +16,16 @@ public class ScreeningDao {
 	
 	public List<ScreeningDto> ScreeningselectAll() throws SQLException {
 		Connection connection = OracleUtility.getConnection();
-		   String sql = "select * from Screeening ";
+		   String sql = "select * from Screening ";
 		   PreparedStatement ps = connection.prepareStatement(sql);
 		   List<ScreeningDto> results = new ArrayList<>();
 		   ResultSet rs = ps.executeQuery();
 		   while(rs.next()) {
-			   results.add(new ScreeningDto(rs.getString(3),
-					   rs.getDate(4)));
+			   results.add(new ScreeningDto(rs.getInt(1),
+					   					rs.getTimestamp(2),
+					   					rs.getString(3),
+					   					rs.getString(4)
+					   ));
 		   }
 		   return results;
 	}
@@ -30,13 +33,12 @@ public class ScreeningDao {
 	// 상영 정보 업데이트
 	public int Screeningupdate(ScreeningDto screen) throws SQLException {
 		Connection connection =   OracleUtility.getConnection();
-		String sql = "update Screening set ScreenNo = ?, MovieNO = ?, MovieTitle = ?, ScreenDate = ?, ScreenTheater =?";
+		String sql = "update Screening set ScreenDate = ?, ScreenTheater =?,  MovieTitle = ? where ScreenNo = ?";
 		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setInt(1, screen.getScreenNO());
-		ps.setString(2, screen.getMovieNO());
+		ps.setTimestamp(1, screen.getScreenDate());
+		ps.setString(2, screen.getScreenTheater());
 		ps.setString(3, screen.getMovieTitle());
-		ps.setDate(4, screen.getScreenDate());
-		ps.setString(5, screen.getScreenTheater());
+		ps.setInt(4, screen.getScreenNO());
 		int result = ps.executeUpdate();
 		
 		ps.close();
@@ -48,13 +50,12 @@ public class ScreeningDao {
 	// 상영 정보 인서트
 	public int Screeninginsert (ScreeningDto screen) throws SQLException {
 		Connection connection =   OracleUtility.getConnection();
-		String sql = "insert into Screening values(?,?,?,?,?)";
+		String sql = "insert into Screening values(?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.setInt(1, screen.getScreenNO());
-		ps.setString(2, screen.getMovieNO());
-		ps.setString(3, screen.getMovieTitle());
-		ps.setDate(4, screen.getScreenDate());
-		ps.setString(5, screen.getScreenTheater());
+		ps.setTimestamp(2, screen.getScreenDate());
+		ps.setString(3, screen.getScreenTheater());
+		ps.setString(4, screen.getMovieTitle());
 		int result = ps.executeUpdate();
 		
 		ps.close();
@@ -63,11 +64,11 @@ public class ScreeningDao {
 	}
 	
 	// 상영 정보 딜리트
-	public int Screeningdelete(ScreeningDto screen) throws SQLException {
+	public int Screeningdelete(int ScreenNo) throws SQLException {
 		Connection connection =   OracleUtility.getConnection();
-		String sql = "delete movie where MovieNo = ?";
+		String sql = "delete from screening where ScreenNo = ?";
 		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setInt(1, screen.getScreenNO());
+		ps.setInt(1, ScreenNo);
 		int result = ps.executeUpdate();
 		
 		ps.close();
