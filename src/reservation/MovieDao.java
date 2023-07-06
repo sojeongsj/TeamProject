@@ -65,7 +65,7 @@ public class MovieDao {
 		
 	}
 
-	
+	// 관리자 기능 selectAll
 	public List<MovieDto> MovieselectAll() throws SQLException {
 		Connection connection = OracleUtility.getConnection();
 		   String sql = "select * from movie ";
