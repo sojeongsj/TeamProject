@@ -59,6 +59,16 @@ public class MovieDao_Test {
 			System.out.println(e);
 		}
 		
+		// MovieDao select 테스트
+		System.out.println("4. selectall 테스트");
+		 dao = new MovieDao();
+		try {
+			List<MovieDto> movie = dao.MovieselectAll();
+			for(MovieDto mov : movie) 
+				System.out.println(mov);
+		}catch(SQLException e) {
+			System.out.println(e);
+		}
 	
 }
 }

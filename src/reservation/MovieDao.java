@@ -2,7 +2,9 @@ package movie.kiosk;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -63,6 +65,23 @@ public class MovieDao {
 		
 	}
 
+	
+	public List<MovieDto> MovieselectAll() throws SQLException {
+		Connection connection = OracleUtility.getConnection();
+		   String sql = "select * from movie ";
+		   PreparedStatement ps = connection.prepareStatement(sql);
+		   List<MovieDto> results = new ArrayList<>();
+		   ResultSet rs = ps.executeQuery();
+		   while(rs.next()) {
+			   results.add(new MovieDto(rs.getString(1),
+					   					rs.getString(2),
+					   					rs.getTimestamp(3),
+					   					rs.getString(4),
+					   					rs.getInt(5)
+					   ));
+		   }
+		   return results;
+	}
 
 	
 }
