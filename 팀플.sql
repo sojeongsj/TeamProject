@@ -170,6 +170,7 @@ CREATE TABLE Screening
 
 
 
+
 /* Create Foreign Keys */
 
 ALTER TABLE Reservation
@@ -179,14 +180,14 @@ ALTER TABLE Reservation
 
 
 ALTER TABLE Reservation
-	ADD FOREIGN KEY (MoiveTitle)
-	REFERENCES Movie (MoiveTitle)
+	ADD FOREIGN KEY (MovieTitle)
+	REFERENCES Movie (MovieTitle)
 ;
 
 
 ALTER TABLE Screening
-	ADD FOREIGN KEY (MoiveTitle)
-	REFERENCES Movie (MoiveTitle)
+	ADD FOREIGN KEY (MovieTitle)
+	REFERENCES Movie (MovieTitle)
 ;
 
 
