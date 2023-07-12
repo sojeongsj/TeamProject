@@ -19,4 +19,12 @@ public class ReservationDto {
 	private String MovieTitle;		//영화이름
 	private int CustNo;			//손님번호
 	private int ScreenNo;		//영화상영품번
-}
+	
+	public ReservationDto(String movieTitle) {
+	    this.MovieTitle = movieTitle;
+	}
+	 public ReservationDto() {
+	        // 기본 생성자
+	    }
+	 }
+

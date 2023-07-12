@@ -5,6 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import food.FoodDTO;
+import pack_CGV_Admin.OracleUtility;
 
 public class ReservationDao {
 /*	
@@ -35,12 +40,13 @@ public class ReservationDao {
 	    		return result;
 	    	}
 	
+	        
 	
 	public int insert(ReservationDto reser) throws SQLException {//3.예매 메소드
 		
 		Connection connection = OracleUtility.getConnection();
 		
-		String sql = "INSERT INTO reservation VALUES(reserseq.nextval, sysdate, ?, cusseq.nextval, ?, ?);";
+		String sql = "INSERT INTO reservation VALUES(reserseq.nextval, sysdate, ?, cusseq.nextval, ?, ?)";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.setString(1, reser.getReserSeat());
 		ps.setString(2, reser.getMovieTitle());//영화이름으로 바꾸기
@@ -84,6 +90,33 @@ public class ReservationDao {
 			 }
 		return result;
 	}
+		
+	public List<ReservationAdminDTO> reservationTotal() throws SQLException {
+	    Connection conn = OracleUtility.getConnection();
+	    String sql = "SELECT r.MovieTitle, COUNT(R.MOVIETITLE), SUM(m.MoviePrice) AS MoviePrice\r\n"
+	    		+ "FROM Reservation r\r\n"
+	    		+ "JOIN Movie m ON r.MovieTitle = m.MovieTitle\r\n"
+	    		+ "GROUP BY r.MovieTitle";
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    List<ReservationAdminDTO> reservations = new ArrayList<>();
+
+	    ResultSet rs = ps.executeQuery();
+	    while (rs.next()) {
+	        String movieTitle = rs.getString("MovieTitle");
+	        int count = rs.getInt("COUNT(R.MOVIETITLE)");
+	        int movieprice = rs.getInt("MoviePrice");
+	        
+	        ReservationAdminDTO reservation = new ReservationAdminDTO(movieTitle, count, movieprice);
+	        reservations.add(reservation);
+	    }  
+	    
+	    ps.close();
+        conn.close();
+
+	    return reservations;
+	}
+	
+	
 //	
 //	public CustomerDTO CustomerOne(int search) throws SQLException {		//4.예매내역검색(전화번호) 
 //		Connection conn = OracleUtility.getConnection();
