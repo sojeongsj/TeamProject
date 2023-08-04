@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+html, body {
+	margin: 0;
+	height: 100%;
+}
+
+nav {
+	background-color: #3f51b5;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	color: white;
+	box-sizing: border-box;
+}
+
+nav ul {
+	margin : 0px;
+	list-style : none;
+	overflow: hidden;
+}
+
+
+nav li {
+	font-size: 120%;
+	margin-left : 20px;
+	float :left;
+}
+
+nav li:nth-child(4){
+	float: right;
+	margin-right: 20px;
+}
+
+main {
+	background-color: #f9f9f9;
+	min-height: 700px;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+main h3 {
+	text-align: center;
+}
+
+main table {
+	margin: auto;
+	width: 700px;
+}
+
+main label {
+	width : 200px;
+	text-align : center;
+	border-radius : 5px;
+	margin : 10px;
+	padding: 10px;
+	display: inline-block;
+	background-color: pink;
+	color : white;
+}
+
+main td, th {
+	margin : 10px;
+	padding: 20px;
+	height: 20px;
+}
+
+hr {
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+#bookCode > hr {
+	width: 200px;
+}
+
+footer {
+	background-color: #3f51b5;
+	text-align: center;
+	color: white;
+	padding-top: 60px;
+	padding-bottom : 60px;
+	box-sizing: border-box;
+}
+
+footer h4 {
+	margin: 18px;
+}
+
+#custId, #bookCode {
+	width : 300px;
+}
+
+main button {
+	color: white;
+	background-color: black;
+	padding :10px;
+	margin : 10px;
+	width: 100px;
+}
