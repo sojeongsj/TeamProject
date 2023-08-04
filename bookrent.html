@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BOOKRENT</title>
+<link rel="stylesheet" href="bookrent.css"> 
+</head>
+<body>
+<nav>
+	<ul>
+		<li>이달의 추천도서</li>
+		<li>도서대여</li>
+		<li>도서반납</li>
+		<li>로그인</li>
+	</ul>
+</nav>
+<main>
+	<form action="">
+	<h3>도서대여</h3>
+			<hr width="700px">
+			<table>
+		<tr>
+			<td><label for="custId">회원 IDX</label></td>
+			<td><input type="text" id="custId" name="id"></td>
+		</tr>
+		<tr>
+			<td><label for="bookCode">도서코드</label></td>
+			<td><input type="text" id="bookCode" name="code"><hr>도서코드로 도서명이 조회되어 나옵니다.<hr></td>
+		</tr>
+		<tr>
+			<td><label for="bookRent">대여일자</label></td>
+			<td><input type="date" id="bookRent" name="rent"></td>
+		</tr>
+		<tr>
+			<td><label for="bookEnd">반납기한일자</label></td>
+			<td><input type="date" id="bookEnd" name="end"><br><button type="button" onclick="rentmessage()">대여</button></td>
+		</tr>
+	</table>
+	<hr width="700px">
+	</form>
+</main>
+<footer>
+	<h4>HRDKOREA Copyright&copy;2023 All rights reserved. Human Resources Development Service of Korea.</h4>
+</footer>
+<script type="text/javascript" src="./bookrent.js"></script>
+</body>
+</html>
